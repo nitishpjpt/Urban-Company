@@ -1,0 +1,21 @@
+{
+  "cli": { "version": ">= 16.3.3", "appVersionSource": "remote" },
+  "build": {
+    "preview": {
+      "distribution": "internal",
+      "android": { "buildType": "apk" },
+      "env": {
+        "EXPO_USE_LEGACY_WORKFLOW": "1"
+      }
+    },
+    "production": {
+      "distribution": "store",
+      "android": { "buildType": "apk" },
+      "autoIncrement": true,
+      "env": {
+        "EXPO_USE_LEGACY_WORKFLOW": "1"
+      }
+    }
+  },
+  "submit": { "production": {} }
+}

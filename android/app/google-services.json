@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1070541766888",
+    "project_id": "batting-aabd9",
+    "storage_bucket": "batting-aabd9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070541766888:android:d130b61c514d08a1abc95d",
+        "android_client_info": {
+          "package_name": "com.nitishpjpt.Batting"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJc7vQgnAiXi_R9655o3VpcMFeoj1TxSE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
