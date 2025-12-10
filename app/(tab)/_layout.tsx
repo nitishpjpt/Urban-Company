@@ -71,7 +71,8 @@ const TabRoot = () => {
           // 4️⃣ Native Icon
           if (route.name === "native") {
             return (
-              <Ionicons name="storefront-outline" size={26} color={color} />
+             <Ionicons name="flash-outline" size={26} color={color} />
+
             );
           }
 
@@ -96,7 +97,7 @@ const TabRoot = () => {
 
       <Tabs.Screen
         name="beauty"
-        options={{ headerShown: false, tabBarLabel: "Beauty" }}
+        options={{ headerShown: false, tabBarLabel: "Painter" }}
       />
       <Tabs.Screen
         name="homes"
@@ -104,7 +105,7 @@ const TabRoot = () => {
       />
       <Tabs.Screen
         name="native"
-        options={{ headerShown: false, tabBarLabel: "Native" }}
+        options={{ headerShown: false, tabBarLabel: "Electrician" }}
       />
       <Tabs.Screen
         name="profile"

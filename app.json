@@ -1,9 +1,9 @@
 {
-  "name": "Batting",
+  "name": "Easy2Get",
   "slug": "batting",
   "version": "1.0.0",
   "orientation": "portrait",
-  "icon": "./assets/images/icon.png",
+  "icon": "./assets/images/easy2get-logo.png",
   "scheme": "myapp",
   "userInterfaceStyle": "automatic",
   "newArchEnabled": true,
@@ -12,7 +12,7 @@
   },
   "android": {
     "adaptiveIcon": {
-      "foregroundImage": "./assets/images/icon.png",
+      "foregroundImage": "./assets/images/easy2get-logo.png",
       "backgroundColor": "#000000"
     },
     "package": "com.nitishpjpt.Batting"
@@ -22,10 +22,11 @@
   },
   "plugins": [
     "expo-router",
+   
     [
       "expo-splash-screen",
       {
-        "image": "./assets/images/splash-icon.png",
+        "image": "./assets/images/easy2get-logo.png",
         "imageWidth": 200,
         "resizeMode": "contain",
         "backgroundColor": "#ffffff"

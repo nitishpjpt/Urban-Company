@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, FlatList, Image } from "react-native";
 
 const categories = [
-  { id: "1", title: "Women's Salon\n& Spa", icon: require("../assets/women.jpg") },
+  { id: "1", title: "Motor Winding", icon: require("../assets/images/motor_8607684.png") },
   { id: "2", title: "Men's Salon\n& Massage", icon: require("../assets/men.jpg") },
   { id: "3", title: "AC & Appliances\nRepair", icon: require("../assets/worker.jpg") },
   { id: "4", title: "Cleaning & Pest\nControl", icon: require("../assets/cleaning_v_01.jpg") },
@@ -26,18 +26,18 @@ export default function CategoryGrid() {
             
             {/* ICON CARD */}
             <View
-              className="w-28 h-28 rounded-2xl bg-[#F4F4F4] justify-center items-center"
+              className="w-28 h-38 rounded-2xl  justify-center items-center"
               style={{
-                shadowColor: "#000",
-                shadowOpacity: 0.06,
-                shadowRadius: 4,
-                shadowOffset: { width: 0, height: 2 },
-                elevation: 2,
+                // shadowColor: "#000",
+                // shadowOpacity: 0.06,
+                // shadowRadius: 4,
+                // shadowOffset: { width: 0, height: 2 },
+                // elevation: 2,
               }}
             >
               <Image
                 source={item.icon}
-                style={{ width: 55, height: 55, resizeMode: "contain" }}
+                style={{ width: 65, height: 55, resizeMode: "contain" }}
               />
             </View>
 

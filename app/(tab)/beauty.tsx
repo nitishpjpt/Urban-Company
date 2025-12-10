@@ -1,3 +1,4 @@
+// screens/PainterHardware.js
 import React, { useState } from "react";
 import {
   View,
@@ -5,231 +6,271 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-  Modal,
+  TextInput,
   ScrollView,
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import LocationHeader from "@/components/locationHeader";
 import useCartStore from "../store/cartStore";
+import { router } from "expo-router";
 
-export default function Beauty() {
-  const [selectedService, setSelectedService] = useState(null);
+export default function PainterHardware() {
+  const navigation = useNavigation();
+  const addToCart = useCartStore((state) => state.addToCart);
 
-  const services = [
+  // Banner section
+  const bannerData = [
     {
-      id: "1",
-      title: "Cleanup & Bleach",
-      subtitle: "For a brighter skin",
-      description:
-        "Our Cleanup & Bleach service deeply cleanses the skin, removes tan, brightens complexion, and gives an instant glow. This includes face cleanup, scrubbing, steaming, extraction (if needed), and professional bleaching with safe products.",
-      rating: 4.76,
-      reviews: "978k",
-      time: "55 mins",
-      price: 1299,
-      img: require("../../assets/images/game8.png"),
+      id: "p1",
+      title: "Professional Painters",
+      subtitle: "Home & Office Solutions",
+      btn: "Book Now",
+      bg: "#FF6B00",
+      img: require("../../assets/images/Painter-removebg-preview.png"), // Replace with relevant image
     },
     {
-      id: "2",
-      title: "Ayurvedic Herbal Facials",
-      subtitle: "For glowing & toned skin",
-      description:
-        "A soothing herbal facial using ancient Ayurvedic formulations blended with modern skincare. Helps in skin tightening, glow enhancement, pigmentation reduction, and deep relaxation.",
-      rating: 4.92,
-      reviews: "786k",
-      time: "1 hr 20 mins",
-      price: 1789,
-      img: require("../../assets/images/game12.jpg"),
-    },
-    {
-      id: "3",
-      title: "Threading",
-      subtitle: "For desired eyebrow shape",
-      description:
-        "Perfect eyebrow shaping using safe threading techniques. Zero chemical usage, precise shaping, and gentle on sensitive skin.",
-      rating: 4.6,
-      reviews: "898k",
-      time: "15 mins",
-      price: 169,
-      img: require("../../assets/images/game18.jpg"),
-    },
-    {
-      id: "4",
-      title: "Full Body Wax",
-      subtitle: "Smooth & shiny skin",
-      description:
-        "Full-body waxing using premium wax for long-lasting smoothness. Removes tan, dead skin cells, and ensures a clean and polished appearance.",
-      rating: 4.83,
-      reviews: "652k",
-      time: "1 hr",
-      price: 1299,
-      img: require("../../assets/images/game2.jpg"),
-    },
-    {
-      id: "5",
-      title: "Manicure & Pedicure",
-      subtitle: "For soft & nourished hands/feet",
-      description:
-        "Relaxing manicure and pedicure including nail trimming, shaping, cuticle care, exfoliation, massage, and polish application. Ideal for dry or cracked skin.",
-      rating: 4.89,
-      reviews: "540k",
-      time: "1 hr 15 mins",
-      price: 899,
-      img: require("../../assets/images/game14.jpg"),
-    },
-    {
-      id: "6",
-      title: "Hair Spa",
-      subtitle: "For smooth & strong hair",
-      description:
-        "Deep nourishment hair spa that restores shine, improves hair strength, reduces frizz, and hydrates the scalp. Includes oil massage, steaming, mask application & wash.",
-      rating: 4.95,
-      reviews: "720k",
-      time: "45 mins",
-      price: 699,
-      img: require("../../assets/images/game2.jpg"),
+      id: "p2",
+      title: "Furniture • Paint • Fixtures",
+      subtitle: "Repairs & Installations",
+      btn: "Get Service",
+      bg: "#FF4500",
+      img: require("../../assets/images/paint-removebg-preview.png"), // Replace with relevant image
     },
   ];
 
-  // add to cart
-  const addToCart = useCartStore((state) => state.addToCart);
+  // Categories
+  const painterHardwareCategories = [
+    { id: "1", title: "Wall Painting", icon: "format-paint" },
+    { id: "2", title: "Furniture Repair", icon: "chair-rolling" },
+    { id: "3", title: "Wood Work", icon: "tools" },
+    { id: "4", title: "Plumbing Fix", icon: "pipe-wrench" },
+    { id: "5", title: "Door & Window Setup", icon: "door" },
+    { id: "6", title: "Decor & Fixtures", icon: "lamp" },
+  ];
+
+  // Service list
+  const painterHardwareServices = [
+    {
+      id: "1",
+      title: "Wall Painting",
+      subtitle: "Interior & Exterior",
+      proName: "Rajesh Kumar",
+      description:
+        "Professional painting services including primer, multiple coats, and finishing.",
+      rating: 4.85,
+      reviews: "320k",
+      time: "2–4 hrs",
+      price: 499,
+      img: require("../../assets/images/home-wall-painting-114.jpg"),
+      category: "1",
+    },
+    {
+      id: "2",
+      title: "Furniture Repair",
+      subtitle: "Tables, Chairs, Cabinets",
+      proName: "Furniture Masters",
+      description:
+        "Repair, polish, and restore furniture to extend lifespan and maintain aesthetics.",
+      rating: 4.92,
+      reviews: "210k",
+      time: "1–2 hrs",
+      price: 349,
+      img: require("../../assets/images/furniture-repairing-services-1583389842-5325843-removebg-preview.png"),
+      category: "2",
+    },
+    {
+      id: "3",
+      title: "Wood Work & Carpentry",
+      subtitle: "Custom shelves, frames & more",
+      proName: "Sanjay Carpenters",
+      description:
+        "Custom carpentry solutions including furniture, shelves, and repair services.",
+      rating: 4.88,
+      reviews: "150k",
+      time: "3–5 hrs",
+      price: 699,
+      img: require("../../assets/images/carpenter-removebg-preview.png"),
+      category: "3",
+    },
+    {
+      id: "4",
+      title: "Plumbing Services",
+      subtitle: "Leaks, Pipes, Fixtures",
+      proName: "Ajay Plumbing Co.",
+      description:
+        "Quick fixes for leakages, pipe replacements, and bathroom/kitchen fittings.",
+      rating: 4.9,
+      reviews: "180k",
+      time: "30–60 mins",
+      price: 299,
+      img: require("../../assets/images/plumber-removebg-preview.png"),
+      category: "4",
+    },
+  ];
 
   return (
-    <>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <LocationHeader />
-      <View className="px-4 mt-4">
-        <FlatList
-          data={services}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <View
-              className="bg-white rounded-2xl p-3 mb-4 flex-row"
-              style={{
-                elevation: 2,
-                shadowColor: "#000",
-                shadowOpacity: 0.12,
-                shadowRadius: 4,
-                shadowOffset: { width: 0, height: 2 },
-              }}
-            >
-              <Image
-                source={item.img}
-                className="w-24 h-24 rounded-xl mr-3"
-                resizeMode="cover"
-              />
 
-              <View className="flex-1 justify-between">
-                <View>
-                  <Text className="text-[15px] font-semibold text-gray-900">
-                    {item.title}
+      {/* PAGE TITLE */}
+      <View className="px-4 mt-4 mb-2">
+        <View className="flex-row items-center">
+          <MaterialCommunityIcons name="brush" size={26} color="#FF6B00" />
+          <Text className="text-[22px] font-bold ml-2 text-gray-800">
+            Painter & Hardware <Text className="text-gray-500">services</Text>
+          </Text>
+        </View>
+
+        {/* SEARCH BAR */}
+        <View className="flex-row items-center bg-gray-100 rounded-xl px-3 py-3 mt-4">
+          <Ionicons name="search-outline" size={20} color="#777" />
+          <TextInput
+            placeholder="Search for ‘wall painting’, ‘furniture repair’"
+            placeholderTextColor="#888"
+            className="ml-2 flex-1"
+          />
+        </View>
+      </View>
+
+      {/* BANNER SECTION */}
+      <FlatList
+        data={bannerData}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{ paddingLeft: 16, paddingTop: 10 }}
+        renderItem={({ item }) => (
+          <View
+            style={{ backgroundColor: item.bg }}
+            className="w-70 h-50 rounded-2xl mr-4 p-4 flex-row items-center"
+          >
+            <View style={{ flex: 1 }}>
+              <Text className="text-white text-[18px] font-bold">
+                {item.title}
+              </Text>
+              <Text className="text-white text-[13px] mt-1">
+                {item.subtitle}
+              </Text>
+
+              <TouchableOpacity className="bg-yellow-400 w-28 py-1 rounded-full mt-4 items-center">
+                <Text className="text-black font-semibold text-[12px]">
+                  {item.btn}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <Image
+              source={item.img}
+              className="w-24 h-24 rounded-lg ml-2"
+              resizeMode="contain"
+            />
+          </View>
+        )}
+      />
+
+      {/* CATEGORIES SECTION */}
+      <View className="px-4 mt-5 flex-row flex-wrap justify-between">
+        {painterHardwareCategories.map((cat) => (
+          <TouchableOpacity
+            key={cat.id}
+            activeOpacity={0.8}
+            className="w-[30%] bg-gray-100 rounded-2xl p-3 mb-4 items-center"
+            onPress={() =>
+              router.push({
+                pathname: "/CategoryProductsPainter",
+                params: {
+                  categoryId: cat.id,
+                  title: cat.title,
+                },
+              })
+            }
+          >
+            <MaterialCommunityIcons
+              name={cat.icon}
+              size={32}
+              color="#FF6B00"
+              style={{ marginBottom: 8 }}
+            />
+            <Text className="text-center text-[12px] font-medium text-gray-700">
+              {cat.title}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* SERVICE LIST */}
+      <View className="px-4 mt-2 mb-10">
+        <Text className="text-[18px] font-bold text-gray-800 mb-3">
+          Popular Painter & Hardware Services
+        </Text>
+
+        {painterHardwareServices.map((item) => (
+          <View
+            key={item.id}
+            className="bg-white rounded-2xl p-3 mb-4 flex-row"
+            style={{
+              elevation: 2,
+              shadowColor: "#000",
+              shadowOpacity: 0.12,
+              shadowRadius: 4,
+              shadowOffset: { width: 0, height: 2 },
+            }}
+          >
+            <Image
+              source={item.img}
+              className="w-24 h-24 rounded-xl mr-3"
+              resizeMode="contain"
+            />
+
+            <View className="flex-1 justify-between">
+              <View>
+                <Text className="text-[15px] font-semibold text-gray-900">
+                  {item.title}
+                </Text>
+
+                <Text className="text-[12px] text-gray-600 mt-1">
+                  {item.subtitle}
+                </Text>
+                <Text className="text-[12px] text-blue-600 mt-1 font-medium">
+                  By: {item.proName}
+                </Text>
+
+                <View className="flex-row items-center mt-2">
+                  <MaterialIcons name="star" size={16} color="#FFD700" />
+                  <Text className="ml-1 text-[12px] text-gray-800">
+                    {item.rating} ({item.reviews})
                   </Text>
 
-                  <Text className="text-[12px] text-gray-600 mt-1">
-                    {item.subtitle}
-                  </Text>
+                  <Text className="text-[12px] text-gray-500 mx-2">•</Text>
 
-                  <View className="flex-row items-center mt-2">
-                    <MaterialIcons name="star" size={16} color="#FFD700" />
-                    <Text className="ml-1 text-[12px] text-gray-800">
-                      {item.rating} ({item.reviews})
-                    </Text>
-
-                    <Text className="text-[12px] text-gray-500 mx-2">•</Text>
-
-                    <Text className="text-[12px] text-gray-600">
-                      {item.time}
-                    </Text>
-                  </View>
+                  <Text className="text-[12px] text-gray-600">{item.time}</Text>
                 </View>
+              </View>
 
-                <View className="flex-row justify-between items-center mt-2">
-                  <Text className="text-[15px] font-bold text-gray-900">
-                    Rs. {item.price}
-                  </Text>
+              {/* Price + Add */}
+              <View className="flex-row justify-between items-center mt-2">
+                <Text className="text-[15px] font-bold text-gray-900">
+                  Rs. {item.price}
+                </Text>
 
-                  <TouchableOpacity
-                    onPress={() => addToCart(item)} // use the current item directly
-                    className="bg-[#8A00FF] px-4 py-2 rounded-full"
-                  >
-                    <Text className="text-white text-[13px] font-semibold">
-                      Add
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-
-                <TouchableOpacity onPress={() => setSelectedService(item)}>
-                  <Text className="text-[#8A00FF] text-[12px] font-medium mt-2">
-                    View details
+                <TouchableOpacity
+                  onPress={() => addToCart(item)}
+                  className="bg-[#FF6B00] px-4 py-2 rounded-full"
+                >
+                  <Text className="text-white text-[13px] font-semibold">
+                    Add
                   </Text>
                 </TouchableOpacity>
               </View>
             </View>
-          )}
-        />
-
-        {/* DETAILS MODAL */}
-        <Modal
-          visible={!!selectedService}
-          animationType="slide"
-          transparent={true}
-        >
-          <View className="flex-1 bg-black/40 justify-center items-center p-4">
-            <View className="bg-white w-full rounded-2xl p-5 max-h-[80%]">
-              <TouchableOpacity
-                className="absolute right-3 top-3"
-                onPress={() => setSelectedService(null)}
-              >
-                <Text className="text-[18px] text-gray-600">✕</Text>
-              </TouchableOpacity>
-
-              <ScrollView showsVerticalScrollIndicator={false} className="mt-6">
-                {selectedService && (
-                  <>
-                    <Text className="text-xl font-bold text-gray-900">
-                      {selectedService.title}
-                    </Text>
-
-                    <Text className="text-[13px] text-gray-500 mt-1">
-                      {selectedService.subtitle}
-                    </Text>
-
-                    <Image
-                      source={selectedService.img}
-                      className="w-full h-48 rounded-xl mt-4"
-                      resizeMode="cover"
-                    />
-
-                    <Text className="mt-4 text-gray-700 leading-5">
-                      {selectedService.description}
-                    </Text>
-
-                    <View className="flex-row items-center mt-4">
-                      <MaterialIcons name="star" size={18} color="#FFD700" />
-                      <Text className="ml-1 text-[13px] text-gray-800">
-                        {selectedService.rating} ({selectedService.reviews})
-                      </Text>
-                    </View>
-
-                    <Text className="mt-2 text-[13px] text-gray-600">
-                      Duration: {selectedService.time}
-                    </Text>
-
-                    <Text className="mt-3 text-lg font-bold text-gray-900">
-                      Price: ₹ {selectedService.price}
-                    </Text>
-                  </>
-                )}
-              </ScrollView>
-
-              <TouchableOpacity className="bg-[#8A00FF] w-full py-3 rounded-full mt-4">
-                <Text className="text-center text-white text-[15px] font-semibold">
-                  Add to Cart
-                </Text>
-              </TouchableOpacity>
-            </View>
           </View>
-        </Modal>
+        ))}
       </View>
-    </>
+    </ScrollView>
   );
 }

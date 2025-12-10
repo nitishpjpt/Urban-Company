@@ -1,12 +1,23 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, Image, Dimensions } from 'react-native';
 
-const uc = () => {
+const { width, height } = Dimensions.get('window');
+
+export default function uc() {
   return (
-    <View>
-      <Text>uc</Text>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Image
+        source={require('../../assets/images/comingsoon.jpg')} // add your image inside assets folder
+        resizeMode="contain"
+        style={{ width: width, height: height }}
+      />
     </View>
-  )
+  );
 }
-
-export default uc

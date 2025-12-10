@@ -1,94 +1,179 @@
-// @ts-nocheck
-import { View, Text, ScrollView, StatusBar } from "react-native";
-import { useState } from "react";
-import { SafeAreaView } from "react-native";
-import CustomHeader from "@/components/Header/Header";
+import React from "react";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { MaterialCommunityIcons, Feather, Ionicons } from "@expo/vector-icons";
 
-const profile = () => {
-  const [formData] = useState({
-    accountNumber: "213193507633",
-    username: "Nitish Prajapati",
-    email: "nitishpjpt97@gmail.com",
-    phoneNumber: "9871785113",
-    profession: "Full Stack Developer",
-    password: "Last change: 5 days ago",
-    firstName: "Nitish",
-    surname: "Prajapati",
-    country: "India",
-    cityTown: "New Delhi",
-  });
-
+export default function ProfileScreen() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#18171D" }}>
-      <StatusBar backgroundColor="#1F1E29" barStyle="light-content" />
-      <CustomHeader title="Profile" />
-      <ScrollView style={{ flex: 1, backgroundColor: "#18171D", padding: 20 }}>
-        {/* Account Section */}
-        <Text style={{ color: "#7D7C86", marginBottom: 10, fontSize: 12 }}>
-          ACCOUNT
+    <ScrollView
+      style={{ flex: 1, backgroundColor: "#fff" }}
+      showsVerticalScrollIndicator={false}
+    >
+      {/* Header */}
+      <View style={{ padding: 20 }}>
+        <Text style={{ fontSize: 26, fontWeight: "700", color: "#000" }}>
+          Verified Customer
         </Text>
-        <View
-          style={{ backgroundColor: "#2D2C3C", borderRadius: 10, padding: 10 }}
-        >
-          {[
-            { label: "Account Number", key: "accountNumber" },
-            { label: "Username", key: "username" },
-            { label: "E-mail", key: "email" },
-            { label: "Phone number", key: "phoneNumber" },
-            { label: "Profession", key: "profession" },
-            { label: "Password", key: "password" },
-          ].map((field) => (
-            <View
-              key={field.key}
-              style={{
-                borderBottomWidth: 1,
-                borderBottomColor: "#3B3A4A",
-                paddingVertical: 12,
-              }}
-            >
-              <Text style={{ color: "#B3B3C6", fontSize: 12 }}>
-                {field.label}
-              </Text>
-              <Text style={{ color: "#fff", fontSize: 14, paddingTop: 5 }}>
-                {formData[field.key] || "Not filled in"}
-              </Text>
-            </View>
-          ))}
-        </View>
+        <Text style={{ fontSize: 16, color: "#666", marginTop: 4 }}>
+          +91 9871785113
+        </Text>
 
-        {/* Personal Information Section */}
-        <Text style={{ color: "#7D7C86", marginVertical: 15, fontSize: 12 }}>
-          PERSONAL INFORMATION
+        {/* Edit icon */}
+        <TouchableOpacity style={{ position: "absolute", right: 20, top: 25 }}>
+          <Feather name="edit-2" size={20} color="#000" />
+        </TouchableOpacity>
+      </View>
+
+      {/* Top Cards Grid */}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          paddingHorizontal: 20,
+        }}
+      >
+        <ProfileCard icon="clipboard-text-outline" label="My bookings" />
+        <ProfileCard icon="fridge-outline" label="Native devices" />
+        <ProfileCard icon="headphones" label="Help & support" />
+      </View>
+
+      {/* List Items */}
+      <View style={{ marginTop: 25 }}>
+        <ProfileItem icon="file-document" label="My Plans" />
+        <ProfileItem icon="wallet-outline" label="Wallet" />
+        <ProfileItem icon="account-star-outline" label="Plus membership" />
+        <ProfileItem icon="star-outline" label="My rating" />
+        <ProfileItem icon="map-marker-outline" label="Manage addresses" />
+        <ProfileItem
+          icon="credit-card-outline"
+          label="Manage payment methods"
+        />
+        <ProfileItem icon="cog-outline" label="Settings" />
+        <ProfileItem icon="information-outline" label="About UC" />
+      </View>
+
+      {/* Refer & Earn Card */}
+      <View
+        style={{
+          backgroundColor: "#eee6ff",
+          marginHorizontal: 20,
+          marginTop: 30,
+          padding: 20,
+          borderRadius: 16,
+        }}
+      >
+        <Text style={{ fontSize: 18, fontWeight: "700", color: "#000" }}>
+          Refer & earn ₹100
         </Text>
-        <View
-          style={{ backgroundColor: "#2D2C3C", borderRadius: 10, padding: 10 }}
+        <Text style={{ color: "#444", marginTop: 6 }}>
+          Get ₹100 when your friend completes their first booking
+        </Text>
+
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#7A3FFF",
+            paddingVertical: 12,
+            borderRadius: 12,
+            marginTop: 15,
+            width: 120,
+            alignItems: "center",
+          }}
         >
-          {[
-            { label: "First name", key: "firstName" },
-            { label: "Surname", key: "surname" },
-            { label: "Country", key: "country" },
-            { label: "City/Town", key: "cityTown" },
-          ].map((field) => (
-            <View
-              key={field.key}
-              style={{
-                borderBottomWidth: 1,
-                borderBottomColor: "#3B3A4A",
-                paddingVertical: 12,
-              }}
-            >
-              <Text style={{ color: "#B3B3C6", fontSize: 12 }}>
-                {field.label}
-              </Text>
-              <Text style={{ color: "#fff", fontSize: 14, paddingTop: 5 }}>
-                {formData[field.key] || "Not filled in"}
-              </Text>
-            </View>
-          ))}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+          <Text style={{ color: "#fff", fontWeight: "600" }}>Refer now</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Logout */}
+      <TouchableOpacity
+        style={{
+          marginTop: 30,
+          marginHorizontal: 20,
+          paddingVertical: 14,
+          borderRadius: 12,
+          backgroundColor: "#fff",
+          borderWidth: 1,
+          borderColor: "#ff4d4d",
+        }}
+      >
+        <Text
+          style={{
+            textAlign: "center",
+            color: "#ff3b3b",
+            fontSize: 16,
+            fontWeight: "600",
+          }}
+        >
+          Logout
+        </Text>
+      </TouchableOpacity>
+
+      {/* Version Text */}
+      <Text
+        style={{
+          textAlign: "center",
+          marginVertical: 30,
+          color: "#666",
+        }}
+      >
+        Version 7.6.28 R553
+      </Text>
+    </ScrollView>
   );
-};
+}
 
-export default profile;
+/* ---------- Components ---------- */
+
+function ProfileCard({ icon, label }) {
+  return (
+    <TouchableOpacity
+      style={{
+        width: "30%",
+        backgroundColor: "#fff",
+        paddingVertical: 25,
+        borderRadius: 12,
+        alignItems: "center",
+        justifyContent: "center",
+        borderWidth: 1,
+        borderColor: "#E5E5E5",
+      }}
+    >
+      <MaterialCommunityIcons name={icon} size={32} color="#333" />
+      <Text
+        style={{
+          marginTop: 8,
+          textAlign: "center",
+          fontWeight: "600",
+          color: "#000",
+        }}
+      >
+        {label}
+      </Text>
+    </TouchableOpacity>
+  );
+}
+
+function ProfileItem({ icon, label }) {
+  return (
+    <TouchableOpacity
+      style={{
+        flexDirection: "row",
+        alignItems: "center",
+        paddingHorizontal: 20,
+        paddingVertical: 18,
+      }}
+    >
+      <MaterialCommunityIcons name={icon} size={26} color="#333" />
+      <Text
+        style={{ marginLeft: 18, fontSize: 16, fontWeight: "500", color: "#000" }}
+      >
+        {label}
+      </Text>
+
+      <Ionicons
+        name="chevron-forward"
+        size={22}
+        color="#999"
+        style={{ marginLeft: "auto" }}
+      />
+    </TouchableOpacity>
+  );
+}

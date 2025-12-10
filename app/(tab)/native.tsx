@@ -1,3 +1,4 @@
+// screens/Electrician.js
 import React, { useState } from "react";
 import {
   View,
@@ -5,15 +6,50 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
-  Modal,
+  TextInput,
   ScrollView,
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import LocationHeader from "@/components/locationHeader";
 import useCartStore from "../store/cartStore";
+import { router } from "expo-router";
 
 export default function Electrician() {
-  const [selectedService, setSelectedService] = useState(null);
+  const navigation = useNavigation();
+  const addToCart = useCartStore((state) => state.addToCart);
+
+  const bannerData = [
+    {
+      id: "e1",
+      title: "Safe & Certified Electricians",
+      subtitle: "Quick fixes for your home",
+      btn: "Book Now",
+      bg: "#0054FF",
+      img: require("../../assets/images/certified-removebg-preview.png"),
+    },
+    {
+      id: "e2",
+      title: "Fan • Light • Switchboard",
+      subtitle: "Installations & repairs",
+      btn: "Get Service",
+      bg: "#003B99",
+      img: require("../../assets/images/switchboard-removebg-preview.png"),
+    },
+  ];
+
+  const electricianCategories = [
+    { id: "1", title: "Switches & Boards", icon: "toggle-switch" },
+    { id: "2", title: "Lights & LED", icon: "lightbulb-on-outline" },
+    { id: "3", title: "Fans & Exhaust", icon: "fan" },
+    { id: "4", title: "Wiring Fix", icon: "electric-switch" },
+    { id: "5", title: "Inverter Setup", icon: "car-battery" },
+    { id: "6", title: "Appliance Fitting", icon: "tools" },
+  ];
 
   const electricianServices = [
     {
@@ -22,12 +58,13 @@ export default function Electrician() {
       subtitle: "Ceiling, wall & exhaust fans",
       proName: "Rahul Sharma",
       description:
-        "Complete fan servicing including installation, wiring check, speed issues, noise reduction, and replacement of faulty parts. Our professionals handle ceiling, wall-mounted, table, pedestal and exhaust fans with precision.",
+        "Complete fan servicing including installation, wiring check, noise reduction and motor issues.",
       rating: 4.82,
       reviews: "650k",
       time: "30–45 mins",
       price: 249,
-      img: require("../../assets/images/game10.png"),
+      img: require("../../assets/images/fan.jpg"),
+      category: "3",
     },
     {
       id: "2",
@@ -35,208 +72,206 @@ export default function Electrician() {
       subtitle: "Loose connections & replacements",
       proName: "Vikas Kumar",
       description:
-        "Switchboard repair includes fixing loose contacts, replacing broken switches, installing new sockets, repairing burnt wiring, and ensuring shock-proof safety. Standard materials used.",
+        "Fixing loose switches, burnt wiring, adding new sockets and ensuring shock-proof safety.",
       rating: 4.91,
       reviews: "480k",
       time: "25–40 mins",
       price: 199,
-      img: require("../../assets/images/game2.jpg"),
+      img: require("../../assets/images/switch.png"),
+      category: "1",
     },
     {
       id: "3",
-      title: "Tube Light/LED Light Installation",
-      subtitle: "New fitting or replacement",
+      title: "LED Light Installation",
+      subtitle: "Panels, tubes & ceiling lights",
       proName: "Sandeep Electric Works",
       description:
-        "Tube-light installation, LED panel fitting, CFL replacement, decorative light installation, and resolving flickering issues. Includes professional mounting and wiring.",
+        "LED installation, tube-light fitting, decorative lights and all minor wiring fixes.",
       rating: 4.88,
       reviews: "720k",
       time: "20–30 mins",
       price: 149,
-      img: require("../../assets/images/game6.jpg"),
+      img: require("../../assets/images/bulb.jpg"),
+      category: "2",
     },
     {
       id: "4",
-      title: "MCB/ Fuse Issues",
-      subtitle: "Short circuit & overload fixes",
+      title: "MCB / Fuse Issues",
+      subtitle: "Short circuit troubleshooting",
       proName: "Ajay Verma",
       description:
-        "MCB tripping, fuse burnouts, power overload troubleshooting, loose wiring fixes, and main line inspection. Helps ensure safety from short circuits and power fluctuations.",
+        "Power overload fixes, fuse burnouts, MCB tripping and electrical safety inspections.",
       rating: 4.93,
       reviews: "390k",
       time: "30 mins",
       price: 299,
-      img: require("../../assets/images/game11.jpg"),
-    },
-    {
-      id: "5",
-      title: "Inverter Checking",
-      subtitle: "Power backup inspection",
-      proName: "Vishnu Electricals",
-      description:
-        "Inverter not working, battery draining fast, low backup time, wiring problems, and voltage fluctuation issues. Full diagnostic by certified technicians.",
-      rating: 4.85,
-      reviews: "210k",
-      time: "45 mins",
-      price: 399,
-      img: require("../../assets/images/game14.jpg"),
+      img: require("../../assets/images/mcb.jpg"),
+      category: "4",
     },
   ];
 
-  // add to cart
-  const addToCart = useCartStore((state) => state.addToCart);
-
   return (
-    <>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <LocationHeader />
-      <View className="px-4 mt-4">
-        <FlatList
-          data={electricianServices}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <View
-              className="bg-white rounded-2xl p-3 mb-4 flex-row"
-              style={{
-                elevation: 2,
-                shadowColor: "#000",
-                shadowOpacity: 0.12,
-                shadowRadius: 4,
-                shadowOffset: { width: 0, height: 2 },
-              }}
-            >
-              {/* IMAGE */}
-              <Image
-                source={item.img}
-                className="w-24 h-24 rounded-xl mr-3"
-                resizeMode="cover"
-              />
 
-              {/* CONTENT */}
-              <View className="flex-1 justify-between">
-                <View>
-                  <Text className="text-[15px] font-semibold text-gray-900">
-                    {item.title}
+      {/* PAGE TITLE */}
+      <View className="px-4 mt-4 mb-2">
+        <View className="flex-row items-center">
+          <MaterialCommunityIcons
+            name="power-plug-outline"
+            size={26}
+            color="#0054FF"
+          />
+          <Text className="text-[22px] font-bold ml-2 text-gray-800">
+            Electrician <Text className="text-gray-500">services</Text>
+          </Text>
+        </View>
+
+        {/* SEARCH BAR */}
+        <View className="flex-row items-center bg-gray-100 rounded-xl px-3 py-3 mt-4">
+          <Ionicons name="search-outline" size={20} color="#777" />
+          <TextInput
+            placeholder="Search for ‘fan repair’, ‘MCB’, ‘switch’"
+            placeholderTextColor="#888"
+            className="ml-2 flex-1"
+          />
+        </View>
+      </View>
+
+      {/* BANNER SECTION */}
+      <FlatList
+        data={bannerData}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{ paddingLeft: 16, paddingTop: 10 }}
+        renderItem={({ item }) => (
+          <View
+            style={{ backgroundColor: item.bg }}
+            className="w-72 h-40 rounded-2xl mr-4 p-4 flex-row items-center"
+          >
+            <View style={{ flex: 1 }}>
+              <Text className="text-white text-[18px] font-bold">
+                {item.title}
+              </Text>
+              <Text className="text-white text-[13px] mt-1">
+                {item.subtitle}
+              </Text>
+
+              <TouchableOpacity className="bg-yellow-400 px-3 py-1 rounded-full mt-4">
+                <Text className="text-black font-semibold text-[12px]">
+                  {item.btn}
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <Image
+              source={item.img}
+              className="w-24 h-28 rounded-xl ml-2"
+              resizeMode="contain"
+            />
+          </View>
+        )}
+      />
+
+      {/* CATEGORIES SECTION */}
+      <View className="px-4 mt-5 flex-row flex-wrap justify-between">
+        {electricianCategories.map((cat) => (
+          <TouchableOpacity
+            key={cat.id}
+            activeOpacity={0.8}
+            className="w-[30%] bg-gray-100 rounded-2xl p-3 mb-4 items-center"
+            onPress={() =>
+              router.push({
+                pathname: "/CategoryProducts",
+                params: {
+                  categoryId: cat.id,
+                  title: cat.title,
+                },
+              })
+            }
+          >
+            <MaterialCommunityIcons
+              name={cat.icon}
+              size={32}
+              color="#0054FF"
+              style={{ marginBottom: 8 }}
+            />
+            <Text className="text-center text-[12px] font-medium text-gray-700">
+              {cat.title}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* SERVICE LIST */}
+      <View className="px-4 mt-2 mb-10">
+        <Text className="text-[18px] font-bold text-gray-800 mb-3">
+          Popular Electrician Services
+        </Text>
+
+        {electricianServices.map((item) => (
+          <View
+            key={item.id}
+            className="bg-white rounded-2xl p-3 mb-4 flex-row"
+            style={{
+              elevation: 2,
+              shadowColor: "#000",
+              shadowOpacity: 0.12,
+              shadowRadius: 4,
+              shadowOffset: { width: 0, height: 2 },
+            }}
+          >
+            <Image
+              source={item.img}
+              className="w-24 h-24 rounded-xl mr-3"
+              resizeMode="contain"
+            />
+
+            <View className="flex-1 justify-between">
+              <View>
+                <Text className="text-[15px] font-semibold text-gray-900">
+                  {item.title}
+                </Text>
+
+                <Text className="text-[12px] text-gray-600 mt-1">
+                  {item.subtitle}
+                </Text>
+                <Text className="text-[12px] text-blue-600 mt-1 font-medium">
+                  By: {item.proName}
+                </Text>
+
+                <View className="flex-row items-center mt-2">
+                  <MaterialIcons name="star" size={16} color="#FFD700" />
+                  <Text className="ml-1 text-[12px] text-gray-800">
+                    {item.rating} ({item.reviews})
                   </Text>
 
-                  <Text className="text-[12px] text-gray-600 mt-1">
-                    {item.subtitle}
-                  </Text>
+                  <Text className="text-[12px] text-gray-500 mx-2">•</Text>
 
-                  {/* ELECTRICIAN NAME */}
-                  <Text className="text-[12px] text-purple-600 mt-1 font-medium">
-                    By: {item.proName}
-                  </Text>
-
-                  {/* RATING + TIME */}
-                  <View className="flex-row items-center mt-2">
-                    <MaterialIcons name="star" size={16} color="#FFD700" />
-                    <Text className="ml-1 text-[12px] text-gray-800">
-                      {item.rating} ({item.reviews})
-                    </Text>
-
-                    <Text className="text-[12px] text-gray-500 mx-2">•</Text>
-
-                    <Text className="text-[12px] text-gray-600">
-                      {item.time}
-                    </Text>
-                  </View>
+                  <Text className="text-[12px] text-gray-600">{item.time}</Text>
                 </View>
+              </View>
 
-                {/* PRICE + ADD BUTTON */}
-                <View className="flex-row justify-between items-center mt-2">
-                  <Text className="text-[15px] font-bold text-gray-900">
-                    Rs. {item.price}
-                  </Text>
+              {/* Price + Add */}
+              <View className="flex-row justify-between items-center mt-2">
+                <Text className="text-[15px] font-bold text-gray-900">
+                  Rs. {item.price}
+                </Text>
 
-                  <TouchableOpacity
-                    onPress={() => addToCart(item)} // use the current item directly
-                    className="bg-[#8A00FF] px-4 py-2 rounded-full"
-                  >
-                    <Text className="text-white text-[13px] font-semibold">
-                      Add
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-
-                {/* VIEW DETAILS */}
-                <TouchableOpacity onPress={() => setSelectedService(item)}>
-                  <Text className="text-[#8A00FF] text-[12px] font-medium mt-2">
-                    View details
+                <TouchableOpacity
+                  onPress={() => addToCart(item)}
+                  className="bg-[#0054FF] px-4 py-2 rounded-full"
+                >
+                  <Text className="text-white text-[13px] font-semibold">
+                    Add
                   </Text>
                 </TouchableOpacity>
               </View>
             </View>
-          )}
-        />
-
-        {/* DETAILS MODAL */}
-        <Modal
-          visible={!!selectedService}
-          animationType="slide"
-          transparent={true}
-        >
-          <View className="flex-1 bg-black/40 justify-center items-center p-4">
-            <View className="bg-white w-full rounded-2xl p-5 max-h-[80%]">
-              <TouchableOpacity
-                className="absolute right-3 top-3"
-                onPress={() => setSelectedService(null)}
-              >
-                <Text className="text-[18px] text-gray-600">✕</Text>
-              </TouchableOpacity>
-
-              <ScrollView showsVerticalScrollIndicator={false} className="mt-6">
-                {selectedService && (
-                  <>
-                    <Text className="text-xl font-bold text-gray-900">
-                      {selectedService.title}
-                    </Text>
-
-                    <Text className="text-[13px] text-gray-500 mt-1">
-                      {selectedService.subtitle}
-                    </Text>
-
-                    <Text className="text-[13px] text-purple-700 mt-1 font-medium">
-                      Electrician: {selectedService.proName}
-                    </Text>
-
-                    <Image
-                      source={selectedService.img}
-                      className="w-full h-48 rounded-xl mt-4"
-                      resizeMode="cover"
-                    />
-
-                    <Text className="mt-4 text-gray-700 leading-5">
-                      {selectedService.description}
-                    </Text>
-
-                    <View className="flex-row items-center mt-4">
-                      <MaterialIcons name="star" size={18} color="#FFD700" />
-                      <Text className="ml-1 text-[13px] text-gray-800">
-                        {selectedService.rating} ({selectedService.reviews})
-                      </Text>
-                    </View>
-
-                    <Text className="mt-2 text-[13px] text-gray-600">
-                      Duration: {selectedService.time}
-                    </Text>
-
-                    <Text className="mt-3 text-lg font-bold text-gray-900">
-                      Price: Rs. {selectedService.price}
-                    </Text>
-                  </>
-                )}
-              </ScrollView>
-
-              <TouchableOpacity className="bg-[#8A00FF] w-full py-3 rounded-full mt-4">
-                <Text className="text-center text-white text-[15px] font-semibold">
-                  Add to Cart
-                </Text>
-              </TouchableOpacity>
-            </View>
           </View>
-        </Modal>
+        ))}
       </View>
-    </>
+    </ScrollView>
   );
 }
