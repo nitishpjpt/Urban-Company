@@ -22,7 +22,7 @@ export default function CartScreen() {
       description: "HyperDev Services Payment",
       image: "https://razorpay.com/favicon.png",
       currency: "INR",
-      key: "rzp_test_4Wlysk0uPT8zwa", // replace with your real Razorpay Key
+      key: " rzp_test_RqemqoJ07B0dTv", // replace with your real Razorpay Key
       amount: totalPrice * 100, // Convert to paise
       name: "HyperDev",
       theme: { color: "#121212" },
