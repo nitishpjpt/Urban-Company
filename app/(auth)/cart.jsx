@@ -19,7 +19,7 @@ export default function CartScreen() {
   // 🔥 RAZORPAY PAYMENT FUNCTION
   const handlePayment = () => {
     const options = {
-      description: "HyperDev Services Payment",
+      description: "Easy2Get Services Payment",
       image: "https://razorpay.com/favicon.png",
       currency: "INR",
       key: " rzp_test_RqemqoJ07B0dTv", // replace with your real Razorpay Key
