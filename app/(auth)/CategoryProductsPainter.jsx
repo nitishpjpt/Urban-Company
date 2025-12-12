@@ -33,28 +33,28 @@ const allServices = [
         title: "Wall Painting",
         subtitle: "Interior & Exterior",
         price: 499,
-        img: require("../../assets/images/game8.png"),
+        img: require("../../assets/images/home-wall-painting-114.jpg"),
     },
     {
         id: "2",
         title: "Furniture Repair",
         subtitle: "Tables, Chairs, Cabinets",
         price: 349,
-        img: require("../../assets/images/game6.jpg"),
+        img: require("../../assets/images/furniture-repairing-services-1583389842-5325843-removebg-preview.png"),
     },
     {
         id: "3",
         title: "Wood Work & Carpentry",
         subtitle: "Custom shelves, frames & more",
         price: 699,
-        img: require("../../assets/images/game14.jpg"),
+        img: require("../../assets/images/carpenter-removebg-preview.png"),
     },
     {
         id: "4",
         title: "Plumbing Services",
         subtitle: "Leaks, Pipes, Fixtures",
         price: 299,
-        img: require("../../assets/images/game7.jpg"),
+        img: require("../../assets/images/plumber-removebg-preview.png"),
     },
 ];
 

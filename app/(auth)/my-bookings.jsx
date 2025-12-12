@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import BookingTabs from "../../components/BookingTabs.jsx";
-import BookingCard from "../../components/BookingCArd.jsx";
+import BookingCard from "../../components/BookingCard.jsx";
 import { bookings } from "../../components/Sample/BookingData.js";
 import { router } from "expo-router";
 

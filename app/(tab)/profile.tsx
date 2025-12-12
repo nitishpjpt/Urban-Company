@@ -51,7 +51,10 @@ export default function ProfileScreen() {
         <ProfileItem icon="account-star-outline" label="Plus membership" />
         <ProfileItem icon="star-outline" label="My rating" />
         <ProfileItem icon="map-marker-outline" label="Manage addresses" />
-        <ProfileItem icon="credit-card-outline" label="Manage payment methods" />
+        <ProfileItem
+          icon="credit-card-outline"
+          label="Manage payment methods"
+        />
         <ProfileItem icon="cog-outline" label="Settings" />
         <ProfileItem icon="information-outline" label="About UC" />
       </View>
@@ -97,6 +100,9 @@ export default function ProfileScreen() {
           backgroundColor: "#fff",
           borderWidth: 1,
           borderColor: "#ff4d4d",
+        }}
+        onPress={() => {
+          router.replace("/"); // Redirect to main page
         }}
       >
         <Text
@@ -169,7 +175,12 @@ function ProfileItem({ icon, label }) {
     >
       <MaterialCommunityIcons name={icon} size={26} color="#333" />
       <Text
-        style={{ marginLeft: 18, fontSize: 16, fontWeight: "500", color: "#000" }}
+        style={{
+          marginLeft: 18,
+          fontSize: 16,
+          fontWeight: "500",
+          color: "#000",
+        }}
       >
         {label}
       </Text>

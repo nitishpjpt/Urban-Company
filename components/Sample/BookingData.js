@@ -7,6 +7,20 @@ export const bookings = {
       address: "Sector 10, Noida",
       status: "Scheduled",
     },
+    {
+      id: 2,
+      service: "Wiring Work",
+      date: "18 Dec 2025 • 4:00 PM",
+      address: "Sector 10, Gurgaon",
+      status: "Scheduled",
+    },
+    {
+      id: 3,
+      service: "Plumbing Services",
+      date: "10 Dec 2025 • 3:00 PM",
+      address: "Faridabad",
+      status: "Scheduled",
+    },
   ],
   completed: [
     {
