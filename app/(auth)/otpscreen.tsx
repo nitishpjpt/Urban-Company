@@ -9,14 +9,10 @@ import {
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
-
 export default function OTPScreen() {
-
-
   const router = useRouter();
   const { phoneNumber } = useLocalSearchParams();
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-
   const inputs = useRef([]);
 
   const handleChange = (text, index) => {
@@ -25,42 +21,37 @@ export default function OTPScreen() {
       newOtp[index] = text;
       setOtp(newOtp);
 
-      // Move to next input if valid
-      if (text !== "" && index < 5) {
-        inputs.current[index + 1].focus();
-      }
-
-      // Go back if empty and backspacing
-      if (text === "" && index > 0) {
-        inputs.current[index - 1].focus();
-      }
+      if (text && index < 5) inputs.current[index + 1].focus();
+      if (!text && index > 0) inputs.current[index - 1].focus();
     }
   };
 
   const handleVerify = () => {
-    const code = otp.join("");
-    console.log("Verifying OTP:", code);
-    router.push({
-      pathname: "/homes",
-    });
-    // Add verification logic here
+    router.push("/homes");
   };
+
+  const isComplete = otp.every((digit) => digit !== "");
 
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      className="flex-1 bg-white px-6 pt-[14rem] items-center"
+      className="flex-1 bg-white px-6 pt-28 items-center"
     >
-      <Text className="text-black text-2xl font-bold mb-2">
-        Enter verification code
+      {/* HEADER */}
+      <Text className="text-black text-3xl font-bold mb-2">
+        Verify your number
       </Text>
-      <Text className="text-gray-400 mb-2 text-center">
-        A 6-digit verification code has been sent to your mobile phone:
-      </Text>
-      <Text className="text-black9 font-semibold mb-6">{phoneNumber}</Text>
 
-      {/* OTP boxes */}
-      <View className="flex-row justify-between w-full px-2 mb-4">
+      <Text className="text-gray-500 text-center mb-1">
+        Enter the 6-digit code sent to
+      </Text>
+
+      <Text className="text-black text-lg font-semibold mb-8">
+        {phoneNumber}
+      </Text>
+
+      {/* OTP INPUT BOXES */}
+      <View className="flex-row justify-between w-full mb-8">
         {otp.map((digit, index) => (
           <TextInput
             key={index}
@@ -69,35 +60,45 @@ export default function OTPScreen() {
             onChangeText={(text) => handleChange(text, index)}
             keyboardType="numeric"
             maxLength={1}
+            className="text-center text-2xl text-black"
             style={{
-              width: 50,
-              height: 55,
-              textAlign: "center",
-              borderRadius: 12,
-              backgroundColor: "black",
-              borderWidth: 1,
-              borderColor: "#4B4B62",
-              color: "white",
-              fontSize: 24,
-              marginHorizontal: 4,
+              width: 55,
+              height: 60,
+              borderRadius: 14,
+              backgroundColor: "#F4F4F5",
+              shadowColor: "#000",
+              shadowOpacity: 0.05,
+              shadowRadius: 6,
+              elevation: 3,
             }}
           />
         ))}
       </View>
 
-      <Text className="text-gray-400 mb-6">
-        Didn’t receive a code?{" "}
-        <Text className="text-violet-400 underline">Request again</Text>
+      {/* RESEND TEXT */}
+      <Text className="text-gray-600 mb-10">
+        Didn’t get the code?{" "}
+        <Text className="text-violet-600 font-medium underline">
+          Resend
+        </Text>
       </Text>
 
+      {/* VERIFY BUTTON */}
       <TouchableOpacity
-        disabled={otp.some((digit) => digit === "")}
+        disabled={!isComplete}
         onPress={handleVerify}
-        className={`w-full py-3 rounded-xl items-center ${
-          otp.every((digit) => digit !== "") ? "bg-violet-600" : "bg-black"
+        className={`w-full py-4 rounded-2xl items-center ${
+          isComplete ? "bg-black" : "bg-gray-300"
         }`}
+        activeOpacity={0.8}
       >
-        <Text className="text-white font-semibold">Verify code</Text>
+        <Text
+          className={`text-base font-semibold ${
+            isComplete ? "text-white" : "text-gray-600"
+          }`}
+        >
+          Verify Code
+        </Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );

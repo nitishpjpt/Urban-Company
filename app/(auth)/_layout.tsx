@@ -23,6 +23,12 @@ const RootLayout = () => {
         name="CategoryProductsPainter"
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="ProviderList"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="ServiceForm" options={{ headerShown: false }} />
+
       <Stack.Screen name="cart" />
 
       <Stack.Screen name="home" />

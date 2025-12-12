@@ -54,8 +54,8 @@ const TabRoot = () => {
           if (route.name === "beauty") {
             return (
               <MaterialCommunityIcons
-                name="spa-outline"
-                size={26}
+                name="palette"
+                size={28}
                 color={color}
               />
             );
