@@ -24,11 +24,11 @@ export default function CartScreen() {
       currency: "INR",
       key: " rzp_test_RqemqoJ07B0dTv", // replace with your real Razorpay Key
       amount: totalPrice * 100, // Convert to paise
-      name: "HyperDev",
+      name: "Easy2Get Services",
       theme: { color: "#121212" },
       prefill: {
-        email: "user@example.com",
-        contact: "9876543210",
+        email: "nitishpjpt97@gmail.com",
+        contact: "9871785113",
         name: "Nitish",
       },
     };
