@@ -108,7 +108,7 @@ export default function PainterHardware() {
       reviews: "180k",
       time: "30–60 mins",
       price: 299,
-      img: require("../../assets/images/plumber-removebg-preview.png"),
+      img: require("../../assets/images/plumber_2-removebg-preview.png"),
       category: "4",
     },
   ];

@@ -119,7 +119,7 @@ export default function ProviderList() {
                             shadowOffset: { width: 0, height: 2 },
                         }}
                     >
-                        <MaterialIcons name="arrow-back" size={20} color="#FF6B00" />
+                        <MaterialIcons name="arrow-back" size={20}  color="#0B61FF" />
                     </TouchableOpacity>
                 </View>
 

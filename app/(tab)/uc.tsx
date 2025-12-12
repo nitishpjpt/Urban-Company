@@ -18,7 +18,7 @@ const categories = [
   {
     id: "plumber",
     name: "Plumber",
-    image: require("../../assets/images/plumber.jpg"),
+    image: require("../../assets/images/plumber_2-removebg-preview.png"),
   },
   {
     id: "acservice",

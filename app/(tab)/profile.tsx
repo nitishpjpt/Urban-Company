@@ -1,8 +1,11 @@
 import React from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { MaterialCommunityIcons, Feather, Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 export default function ProfileScreen() {
+  const router = useRouter();
+
   return (
     <ScrollView
       style={{ flex: 1, backgroundColor: "#fff" }}
@@ -31,7 +34,12 @@ export default function ProfileScreen() {
           paddingHorizontal: 20,
         }}
       >
-        <ProfileCard icon="clipboard-text-outline" label="My bookings" />
+        <ProfileCard
+          icon="clipboard-text-outline"
+          label="My bookings"
+          onPress={() => router.push("/my-bookings")}
+        />
+
         <ProfileCard icon="fridge-outline" label="Native devices" />
         <ProfileCard icon="headphones" label="Help & support" />
       </View>
@@ -43,10 +51,7 @@ export default function ProfileScreen() {
         <ProfileItem icon="account-star-outline" label="Plus membership" />
         <ProfileItem icon="star-outline" label="My rating" />
         <ProfileItem icon="map-marker-outline" label="Manage addresses" />
-        <ProfileItem
-          icon="credit-card-outline"
-          label="Manage payment methods"
-        />
+        <ProfileItem icon="credit-card-outline" label="Manage payment methods" />
         <ProfileItem icon="cog-outline" label="Settings" />
         <ProfileItem icon="information-outline" label="About UC" />
       </View>
@@ -122,9 +127,10 @@ export default function ProfileScreen() {
 
 /* ---------- Components ---------- */
 
-function ProfileCard({ icon, label }) {
+function ProfileCard({ icon, label, onPress }) {
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={{
         width: "30%",
         backgroundColor: "#fff",

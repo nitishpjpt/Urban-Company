@@ -28,6 +28,7 @@ const RootLayout = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="ServiceForm" options={{ headerShown: false }} />
+      <Stack.Screen name="my-bookings" options={{ headerShown: false }} />
 
       <Stack.Screen name="cart" />
 
